@@ -1,10 +1,20 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react-native/no-inline-styles */
 import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
-import React from 'react';
+import React, {useCallback, useState} from 'react';
 import Button from '../../components/Button/Button';
+import {useNavigation} from '@react-navigation/native';
 
 const LoginScreen = () => {
+  const [mobileNumber, setMobileNumber] = useState('');
+  const {navigate} = useNavigation();
+
+  const onPressLogin = useCallback(() => {
+    if (mobileNumber.length === 10) {
+      navigate('otpVerify', {mobileNumber});
+    }
+  }, [mobileNumber, navigate]);
+
   return (
     <View style={{flex: 1, backgroundColor: '#0B3DA9'}}>
       <View
@@ -47,13 +57,14 @@ const LoginScreen = () => {
             keyboardType="numeric"
             placeholder="Phone Number"
             maxLength={10}
+            onChangeText={setMobileNumber}
           />
         </View>
         <View
           style={{width: '100%', paddingVertical: 15, paddingHorizontal: 10}}>
           <Button
             label="Log In with mobile"
-            onPress={() => {}}
+            onPress={onPressLogin}
             style={{
               backgroundColor: '#0B3DA9',
             }}

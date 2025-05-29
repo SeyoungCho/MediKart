@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Onboarding from './src/screens/Onboarding/Onboarding';
 import LoginScreen from './src/screens/LoginScreen/LoginScreen';
+import OtpVerification from './src/screens/OtpVerification/OtpVerification';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +21,7 @@ const Navigation = () => {
           component={LoginScreen}
           options={{headerShown: false}}
         />
+        <Stack.Screen name="otpVerify" component={OtpVerification} />
       </Stack.Navigator>
     </NavigationContainer>
   );
