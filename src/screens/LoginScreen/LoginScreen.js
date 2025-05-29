@@ -4,6 +4,7 @@ import {StyleSheet, Text, View, Image, TextInput} from 'react-native';
 import React, {useCallback, useState} from 'react';
 import Button from '../../components/Button/Button';
 import {useNavigation} from '@react-navigation/native';
+import {COLORS} from '../../styles/color';
 
 const LoginScreen = () => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -16,7 +17,7 @@ const LoginScreen = () => {
   }, [mobileNumber, navigate]);
 
   return (
-    <View style={{flex: 1, backgroundColor: '#0B3DA9'}}>
+    <View style={{flex: 1, backgroundColor: COLORS.PRIMARY}}>
       <View
         style={{
           flex: 0.6,
@@ -46,7 +47,7 @@ const LoginScreen = () => {
             flexDirection: 'row',
             height: 50,
             borderColor: 'gray',
-            borderWidth: 2,
+            borderWidth: 1,
             alignItems: 'center',
             margin: 10,
             borderRadius: 10,
@@ -66,7 +67,7 @@ const LoginScreen = () => {
             label="Log In with mobile"
             onPress={onPressLogin}
             style={{
-              backgroundColor: '#0B3DA9',
+              backgroundColor: COLORS.PRIMARY,
             }}
           />
         </View>
@@ -82,7 +83,7 @@ const LoginScreen = () => {
             justifyContent: 'center',
             gap: 4,
             borderColor: '#939393',
-            borderWidth: 2,
+            borderWidth: 1,
           }}>
           <Image source={require('../../assets/img/google_icon.png')} />
           <Text style={{fontSize: 18, color: 'black'}}>

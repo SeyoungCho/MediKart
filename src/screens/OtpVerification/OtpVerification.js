@@ -5,6 +5,7 @@ import React, {useCallback, useEffect, useState} from 'react';
 import {OtpInput} from 'react-native-otp-entry';
 import Button from '../../components/Button/Button';
 import {useNavigation} from '@react-navigation/native';
+import {COLORS} from '../../styles/color';
 
 const OtpVerification = ({route}) => {
   const {mobileNumber} = route?.params;
@@ -13,9 +14,10 @@ const OtpVerification = ({route}) => {
 
   const countDown = useCallback(() => {
     if (counter > 0) {
-      setCounter(counter - 1);
+      setCounter(prev => prev - 1);
     }
-  }, [counter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const timer = setInterval(countDown, 1000);
@@ -25,7 +27,8 @@ const OtpVerification = ({route}) => {
   const onChangeText = useCallback(text => {}, []);
 
   const onOTPFilled = useCallback(text => {
-    console.log('Received: ', text);
+    navigate('homeScreen');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -51,7 +54,7 @@ const OtpVerification = ({route}) => {
       )}
       {counter === 0 && (
         <Button>
-          <Text style={{fontSize: 16, color: '#0B3DA9'}}>Resend</Text>
+          <Text style={{fontSize: 16, color: COLORS.PRIMARY}}>Resend</Text>
         </Button>
       )}
     </View>

@@ -4,6 +4,7 @@ import {StyleSheet, Text, View, ImageBackground, Image} from 'react-native';
 import Button from '../../components/Button/Button';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {COLORS} from '../../styles/color';
 
 const Onboarding = () => {
   const navigation = useNavigation();
@@ -57,7 +58,7 @@ const Onboarding = () => {
               navigation.navigate('loginScreen');
             }}
             style={{
-              backgroundColor: '#0B3DA9',
+              backgroundColor: COLORS.PRIMARY,
             }}
           />
         </View>
