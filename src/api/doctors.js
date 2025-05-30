@@ -10,3 +10,10 @@ export const fetchDoctors = async () => {
   // const {data} = await axios.get(url);
   return doctorsData;
 };
+
+export const fetchDoctorById = async doctorId => {
+  const url = BASE_URL + API_PATH.DOCTORS + '/' + doctorId;
+
+  // const {data} = await axios.get(url);
+  return doctorsData?.find(doctor => doctor.id === doctorId);
+};

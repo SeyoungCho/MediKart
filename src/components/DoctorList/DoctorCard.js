@@ -8,19 +8,32 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 const cardGap = 16;
 const cardWidth = (Dimensions.get('window').width - cardGap * 3) / 2;
 
-const DoctorCard = ({name, image, specialty, rating, fee, horizontal}) => {
+const DoctorCard = ({
+  name,
+  image,
+  specialty,
+  rating,
+  fee,
+  horizontal,
+  id,
+  style,
+}) => {
+  const {navigate} = useNavigation();
   return (
-    <TouchableOpacity style={styles.container}>
+    <TouchableOpacity
+      onPress={() => navigate('doctorDetails', {doctorId: id})}
+      style={[styles.container, style]}>
       <Image
         source={{uri: image}}
         style={[
           styles.image,
           !horizontal && {
-            height: '65%',
+            height: 220,
           },
         ]}
       />

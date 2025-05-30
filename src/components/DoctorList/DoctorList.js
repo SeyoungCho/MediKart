@@ -1,17 +1,36 @@
 /* eslint-disable react-native/no-inline-styles */
-import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {FlatList, Image, StyleSheet, View} from 'react-native';
 import React from 'react';
 import {useQuery} from '@tanstack/react-query';
 import {fetchDoctors} from '../../api/doctors';
 import DoctorCard from './DoctorCard';
+import Button from '../Button/Button';
+import {useNavigation} from '@react-navigation/native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Platform} from 'react-native';
 
 const DoctorList = ({horizontal = false}) => {
-  const {data, isLoading, error} = useQuery({
+  const {data} = useQuery({
     queryKey: ['doctors'],
     queryFn: fetchDoctors,
   });
+  const navigation = useNavigation();
+  const CustomView =
+    Platform.OS === 'ios' ? View : horizontal ? View : SafeAreaView;
   return (
-    <View style={styles.container}>
+    <CustomView style={styles.container}>
+      {!horizontal && (
+        <View
+          style={{
+            flexDirection: 'row',
+            backgroundColor: 'white',
+            height: 40,
+          }}>
+          <Button onPress={() => navigation.goBack()}>
+            <Image source={require('../../assets/img/back.png')} />
+          </Button>
+        </View>
+      )}
       <FlatList
         data={data}
         renderItem={({item}) => {
@@ -24,10 +43,10 @@ const DoctorList = ({horizontal = false}) => {
         horizontal={horizontal}
         numColumns={!horizontal && 2}
         columnWrapperStyle={
-          !horizontal && {justifyContent: 'space-between', gap: 16}
+          !horizontal && {justifyContent: 'space-between', flex: 1, gap: 12}
         }
       />
-    </View>
+    </CustomView>
   );
 };
 
@@ -37,5 +56,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
+    backgroundColor: 'white',
   },
 });

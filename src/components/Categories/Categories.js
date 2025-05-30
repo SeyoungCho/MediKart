@@ -23,7 +23,7 @@ const Categories = ({onChangeCategory}) => {
         style={[
           styles.categoryItem,
           selected === index && {backgroundColor: COLORS.PRIMARY},
-          index === symptomList.length - 1 && {marginRight: 10},
+          index === symptomList.length - 1 && {marginRight: 20},
         ]}>
         <Text
           style={{
