@@ -6,6 +6,7 @@ import LoginScreen from './src/screens/LoginScreen/LoginScreen';
 import OtpVerification from './src/screens/OtpVerification/OtpVerification';
 import HomeScreen from './src/screens/HomeScreen/HomeScreen';
 import SearchScreen from './src/screens/SearchScreen/SearchScreen';
+import DoctorList from './src/components/DoctorList/DoctorList';
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +33,11 @@ const Navigation = () => {
         <Stack.Screen
           name="searchScreen"
           component={SearchScreen}
+          options={{headerShown: false}}
+        />
+        <Stack.Screen
+          name="doctorList"
+          component={DoctorList}
           options={{headerShown: false}}
         />
       </Stack.Navigator>
