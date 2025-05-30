@@ -9,6 +9,9 @@ import React from 'react';
 
 import {StyleSheet, SafeAreaView} from 'react-native';
 import Navigation from './Navigation';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 function App(): React.JSX.Element {
   /*
@@ -23,7 +26,9 @@ function App(): React.JSX.Element {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Navigation />
+      <QueryClientProvider client={queryClient}>
+        <Navigation />
+      </QueryClientProvider>
     </SafeAreaView>
   );
 }
