@@ -7,8 +7,10 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-import React from 'react';
+import React, {useMemo} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@tanstack/react-query';
+import {fetchSpecialties} from '../../api/specialties';
 
 const cardGap = 16;
 const cardWidth = (Dimensions.get('window').width - cardGap * 3) / 2;
@@ -22,8 +24,17 @@ const DoctorCard = ({
   horizontal,
   id,
   style,
+  imageStyle,
+  displayAll,
 }) => {
   const {navigate} = useNavigation();
+  const {data} = useQuery({
+    queryKey: ['specialties'],
+    queryFn: () => fetchSpecialties(),
+  });
+  const specialtyObj = useMemo(() => {
+    return data?.find(item => item.id === specialty);
+  }, [data, specialty]);
   return (
     <TouchableOpacity
       onPress={() => navigate('doctorDetails', {doctorId: id})}
@@ -35,6 +46,7 @@ const DoctorCard = ({
           !horizontal && {
             height: 220,
           },
+          imageStyle,
         ]}
       />
 
@@ -44,9 +56,10 @@ const DoctorCard = ({
           <Image source={require('../../assets/img/star.png')} />
           <Text>{rating}</Text>
         </View>
-        <View style={styles.feeContainer}>
-          <Text>Fee ₹{fee}</Text>
-        </View>
+      </View>
+      <View style={styles.subMetaDataContainer}>
+        {!displayAll && <Text>Fee ₹{fee}</Text>}
+        {displayAll && <Text>{specialtyObj?.title}</Text>}
       </View>
     </TouchableOpacity>
   );
@@ -78,8 +91,9 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     padding: 5,
   },
-  feeContainer: {
+  subMetaDataContainer: {
     flexDirection: 'row',
-    paddingVertical: 5,
+    gap: 5,
+    paddingHorizontal: 5,
   },
 });

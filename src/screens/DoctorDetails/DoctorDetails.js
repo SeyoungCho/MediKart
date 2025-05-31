@@ -15,7 +15,12 @@ const DoctorDetails = ({route}) => {
   return (
     <ScrollView style={styles.container}>
       <View>
-        <DoctorCard {...data} style={styles.cardStyle} />
+        <DoctorCard
+          {...data}
+          style={styles.cardStyle}
+          imageStyle={styles.imageStyle}
+          displayAll
+        />
       </View>
     </ScrollView>
   );
@@ -31,5 +36,8 @@ const styles = StyleSheet.create({
   },
   cardStyle: {
     width: '100%',
+  },
+  imageStyle: {
+    height: 340,
   },
 });
